@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: alpha
+  datasource:
+    username: postgres
+    password: roottppy
+    url: jdbc:postgresql://localhost:5432/alpha-crm
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    schemas:
+    - alpha
+    default-schema: alpha
+server:
+  port: 8080
+
