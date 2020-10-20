@@ -1,10 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Регистрация Демо режима</title>
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" th:href="@{/css/site.css}" />
+
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script></head>
 </head>
 <body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">Регистрация учетной записи (демо)</h4>
+      <form class="needs-validation" th:classappend="${#fields.hasErrors()} ? 'has-server-validate-errors' : ''" th:action="@{/tryit}" th:object="${tryitForm}" method="post" novalidate>
+        <div class="mb-3">
+          <label for="organization" class="required">Название организации</label>
+          <input type="text" class="form-control" id="organization" th:field="*{orgName}" th:errorclass="has-error" required>
+          <div class="invalid-feedback">
+            Поле "Название организации" является обязательным
+          </div>
+          <div class="invalid-server-feedback" th:errors="*{orgName}"></div>
+        </div>
 
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstname" class="required">Имя</label>
+            <input type="text" class="form-control" id="firstname" th:field="*{firstname}" required>
+            <div class="invalid-feedback">
+              Поле "Имя" является обязательным
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastname" class="required">Фамилия</label>
+            <input type="text" class="form-control" id="lastname" th:field="*{lastname}" required>
+            <div class="invalid-feedback">
+              Поле "Фамилия" является обязательным
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="middlename">Отчество</label>
+            <input type="text" class="form-control" id="middlename" th:field="*{middlename}">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="required">Email (используется как логин)</label>
+          <input type="email" class="form-control" id="email" th:field="*{email}" th:errorclass="has-error" required>
+          <div class="invalid-feedback">
+            Пожалуйста, задайте действительный email
+          </div>
+          <div class="invalid-server-feedback" th:errors="*{email}"></div>
+        </div>
+
+        <div class="mb-3">
+          <label for="phone">Телефон</label>
+          <input type="text" class="form-control" id="phone">
+        </div>
+        <hr class="mb-4">
+
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Создать</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+</div>
 </body>
 </html>

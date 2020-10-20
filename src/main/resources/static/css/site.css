@@ -1,0 +1,23 @@
+label.required:after {
+  content: '*';
+  color: red;
+}
+
+.invalid-server-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+.has-server-validate-errors .form-control.has-error {
+  border-color: #dc3545;
+  padding-right: calc(1.5em + .75rem);
+  background: no-repeat right calc(.375em + .1875rem) center;
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+.has-server-validate-errors .invalid-server-feedback {
+  display: block;
+}
