@@ -5,8 +5,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.monsterdev.alphacrm.domain.UserEntity;
-import ru.monsterdev.alphacrm.model.AlphaUser;
+import org.springframework.transaction.annotation.Transactional;
+import ru.monsterdev.alphacrm.domain.AlphaUser;
+import ru.monsterdev.alphacrm.model.UserData;
 import ru.monsterdev.alphacrm.repository.UserRepository;
 
 @Service
@@ -17,10 +18,25 @@ public class UserService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    UserEntity user = repository.findByEmail(username)
+    AlphaUser user = repository.findByEmail(username)
         .orElseThrow(() -> new UsernameNotFoundException(String.format("Пользователь %s не найден", username)));
 
     AlphaUser alphaUser = new AlphaUser();
     return alphaUser;
+  }
+
+  @Transactional
+  public AlphaUser createUser(UserData userInfo) {
+    AlphaUser entity = new AlphaUser();
+    entity.setFirstname(userInfo.getFirstname());
+    entity.setLastname(userInfo.getLastname());
+    entity.setMiddletname(userInfo.getMiddletname());
+    entity.setOrgId(userInfo.getOrgId());
+    entity.setEmail(userInfo.getEmail());
+    entity.setPassword(userInfo.getPassword());
+    entity.setPhone(userInfo.getPhone());
+    entity.setRoleId(userInfo.getRoleId());
+    entity.setSubjectId(userInfo.getSubjectId());
+    return repository.save(entity);
   }
 }

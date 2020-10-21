@@ -1,13 +1,10 @@
-package ru.monsterdev.alphacrm.domain;
+package ru.monsterdev.alphacrm.model;
 
 import java.util.Date;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 @Data
-public class UserEntity {
-  @Id
-  private Long id;
+public class UserData {
   private String firstname;
   private String lastname;
   private String middletname;

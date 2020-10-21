@@ -1,7 +1,7 @@
 package ru.monsterdev.alphacrm.services;
 
 import ru.monsterdev.alphacrm.domain.OrganizationEntity;
-import ru.monsterdev.alphacrm.model.TryitForm;
+import ru.monsterdev.alphacrm.model.OrganizationData;
 
 /**
  * Сервис по работе с организациями
@@ -11,7 +11,7 @@ public interface OrganizationService {
 
   /**
    * Создает новую организацию, используемую для тестовых целей
-   * @return тестовая организация
+   * @return сохраненная организация
    */
-  OrganizationEntity createDemoOrganization(TryitForm tryitForm);
+  OrganizationEntity createOrganization(OrganizationData organization);
 }
