@@ -14,7 +14,7 @@ public class AlphaUser implements UserDetails {
   private Long id;
   private String firstname;
   private String lastname;
-  private String middletname;
+  private String middlename;
   private Long orgId;
   private String email;
   private String password;

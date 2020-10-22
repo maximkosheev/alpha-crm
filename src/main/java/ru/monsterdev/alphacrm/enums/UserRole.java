@@ -2,7 +2,9 @@ package ru.monsterdev.alphacrm.enums;
 
 import java.util.Arrays;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
 @AllArgsConstructor
 public enum UserRole {
   ROLE_ADMIN(1, "Администратор организации"),
