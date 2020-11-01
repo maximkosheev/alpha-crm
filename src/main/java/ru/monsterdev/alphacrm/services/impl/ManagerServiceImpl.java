@@ -1,5 +1,6 @@
 package ru.monsterdev.alphacrm.services.impl;
 
+import javax.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import ru.monsterdev.alphacrm.domain.AlphaUser;
 import ru.monsterdev.alphacrm.domain.OrganizationEntity;
 import ru.monsterdev.alphacrm.enums.Tariff;
 import ru.monsterdev.alphacrm.enums.UserRole;
+import ru.monsterdev.alphacrm.exceptions.BusinessLogicException;
 import ru.monsterdev.alphacrm.model.OrganizationData;
 import ru.monsterdev.alphacrm.model.TryitForm;
 import ru.monsterdev.alphacrm.model.UserData;
@@ -29,7 +31,7 @@ public class ManagerServiceImpl implements ManagerService {
 
   @Override
   @Transactional
-  public void createDemoAccount(TryitForm accountInfo) {
+  public AlphaUser createDemoAccount(TryitForm accountInfo) throws BusinessLogicException {
     try {
       log.debug("Создание демо-аккаунта", accountInfo.toString());
       // Создание демо-организации
@@ -50,9 +52,10 @@ public class ManagerServiceImpl implements ManagerService {
       AlphaUser userEntity = userService.createUser(userData);
       // Отправка пароля пользователя на указанную почту
       mailService.sendNewUserMessage(userData);
+      return userEntity;
     } catch (Exception ex) {
       log.error(ex.getMessage(), ex);
-      throw ex;
+      throw new BusinessLogicException("При создании аккаунта произошла ошибка. Обратитесь к администратору");
     }
   }
 

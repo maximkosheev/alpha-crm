@@ -1,13 +1,14 @@
 package ru.monsterdev.alphacrm.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
 
 @Data
-@Table(value = "alpha.op_security_grants")
+@Entity
+@Table(name = "op_security_grants", schema = "alpha")
 public class SecurityGrantEntity {
   @Id
   private Long id;
-
 }

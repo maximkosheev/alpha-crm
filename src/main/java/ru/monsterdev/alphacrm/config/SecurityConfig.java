@@ -20,8 +20,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http
         .authorizeRequests()
-          .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-        .antMatchers("/", "/tryit").permitAll()
+        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+        .antMatchers("/", "/index.html").permitAll()
+        .antMatchers("/tryit", "/tryit/success", "/tryit/failed").permitAll()
         .anyRequest().authenticated()
         .and()
         .formLogin().loginPage("/login").permitAll()

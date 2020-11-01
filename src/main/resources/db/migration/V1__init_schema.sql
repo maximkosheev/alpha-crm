@@ -24,12 +24,15 @@ create trigger tbi_op_tariff before insert on
     alpha.op_tariff for each row execute procedure alpha.trigger_set_create_date();
 
 -- организация
+CREATE SEQUENCE alpha.op_organization_seq;
+
 create table alpha.op_organization (
-  id bigserial not null,
+  id bigint not null default nextval('alpha.op_organization_seq'),
   name varchar(100) not null,
   tariff_id int4 not null,
   create_date timestamp not null,
   constraint pk_organization primary key (id),
+  constraint uk_organization unique (name),
   constraint fk_organization_tariff foreign key(tariff_id) references alpha.op_tariff(id)
 );
 
@@ -42,6 +45,7 @@ create trigger tbi_op_organization before insert on
 
 create sequence alpha.subject_id_seq;
 
+-- роли
 create table alpha.op_role (
   id int4 not null,
   role varchar(15) not null,
@@ -53,8 +57,10 @@ create table alpha.op_role (
 );
 
 -- Пользователь системы
+CREATE SEQUENCE alpha.op_user_seq;
+
 create table alpha.op_user (
-  id bigserial not null,
+  id bigint not null default nextval('alpha.op_user_seq'),
   firstname text not null,
   lastname text not null,
   middlename text,

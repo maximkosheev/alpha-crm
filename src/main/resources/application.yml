@@ -10,6 +10,25 @@ spring:
     schemas:
     - alpha
     default-schema: alpha
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: maximkosheev@gmail.com
+    password: 10surv01
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    templates:
+      path: mail-templates
 server:
   port: 8080
-
+app:
+  mail:
+    send-from: noreply@alphacrm.com
+google:
+  reCAPTCHA:
+    site-key: 6Lf2C9sZAAAAAFLrMZiRTt9-YQ1sf1EJ02PduwMa
+    secret-key: 6Lf2C9sZAAAAAMpt34tXsLMHuAKVbC8eE15SajbG
